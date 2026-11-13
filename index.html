@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <script>document.documentElement.classList.add('js')</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Café Andén · Café de barrio en Ñuñoa</title>
+  <meta name="description" content="Cafetería de barrio a media cuadra del metro Irarrázaval. Café tostado en Santiago, horneado del día, wifi y enchufes, pedidos por WhatsApp para retirar.">
+  <meta name="theme-color" content="#31402D">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Café Andén · Café de barrio, bien hecho">
+  <meta property="og:description" content="A media cuadra del metro Irarrázaval. Wifi, enchufes y pedidos por WhatsApp para retirar.">
+  <meta property="og:image" content="https://cafeteria.sotodev.cl/img/og.jpg">
+  <meta property="og:url" content="https://cafeteria.sotodev.cl/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/local-1600.webp"
+        imagesrcset="img/local-960.webp 960w, img/local-1600.webp 1600w, img/local-2400.webp 2400w" imagesizes="100vw">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PORTADA -->
+  <header class="hero" id="inicio">
+    <img class="hero__img"
+         src="img/local-1600.webp"
+         srcset="img/local-960.webp 960w, img/local-1600.webp 1600w, img/local-2400.webp 2400w"
+         sizes="100vw" width="1600" height="994"
+         alt="Interior de Café Andén: barra de madera, muro de ladrillo y mesas con gente trabajando"
+         fetchpriority="high">
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <nav class="nav wrap" aria-label="Principal">
+      <a class="nav__brand" href="#inicio">Café Andén</a>
+      <ul class="nav__links">
+        <li><a href="#carta">Carta</a></li>
+        <li><a href="#trabajar">Para trabajar</a></li>
+        <li><a href="#llegar">Cómo llegar</a></li>
+      </ul>
+      <a class="btn btn--cream btn--sm js-wa" href="#pedir">Pedir por WhatsApp</a>
+    </nav>
+
+    <div class="hero__content wrap">
+      <h1 class="hero__title"><span class="line"><span>Café de barrio,</span></span> <span class="line"><span>bien hecho.</span></span></h1>
+      <p class="hero__lead">Tostamos en Santiago, horneamos todas las mañanas y tenemos mesas largas para quedarse. A media cuadra del metro Irarrázaval.</p>
+      <div class="hero__actions">
+        <a class="btn btn--cream" href="#carta">Ver la carta</a>
+        <a class="btn btn--outline" href="#llegar">Cómo llegar</a>
+      </div>
+      <p class="hero__meta">Lun a vie 7:30–20:30 · Sábado 9:00–20:00 · Wifi y enchufes · Terraza con perros bienvenidos</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CARTA -->
+    <section class="carta" id="carta" aria-labelledby="carta-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="carta-title" class="h2">Lo que más sale.</h2>
+          <p class="sec-head__text">Grano de tueste medio, tostado cada dos semanas en San Joaquín. Leche de avena o almendra sin cobro extra.</p>
+        </div>
+
+        <div class="destacados">
+          <div class="destacados__col">
+            <figure class="prod">
+              <img src="img/capuchino-600.webp"
+                   srcset="img/capuchino-600.webp 600w, img/capuchino-1100.webp 1100w"
+                   sizes="(min-width: 860px) 46vw, 100vw" width="600" height="900" loading="lazy"
+                   alt="Capuchino con arte latte en taza blanca, junto a un notebook">
+              <figcaption>
+                <div class="prod__row"><h3 class="prod__name">Capuchino</h3><span class="prod__price">$3.300</span></div>
+                <p class="prod__desc">Doble espresso y leche texturizada justo, sin espuma de más. El que más pedimos a la hora de almuerzo.</p>
+              </figcaption>
+            </figure>
+
+            <figure class="prod">
+              <img src="img/torta-700.webp"
+                   srcset="img/torta-700.webp 700w, img/torta-1300.webp 1300w"
+                   sizes="(min-width: 860px) 46vw, 100vw" width="700" height="467" loading="lazy"
+                   alt="Porción de torta tres chocolates con cobertura brillante">
+              <figcaption>
+                <div class="prod__row"><h3 class="prod__name">Torta tres chocolates</h3><span class="prod__price">$3.900</span></div>
+                <p class="prod__desc">La hace Carmen los jueves. Si vienes el sábado en la tarde, pregunta antes: casi nunca llega.</p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="destacados__col destacados__col--offset">
+            <figure class="prod">
+              <img src="img/cortado-700.webp"
+                   srcset="img/cortado-700.webp 700w, img/cortado-1300.webp 1300w"
+                   sizes="(min-width: 860px) 46vw, 100vw" width="700" height="490" loading="lazy"
+                   alt="Barista sirviendo leche en un cortado en vaso de vidrio">
+              <figcaption>
+                <div class="prod__row"><h3 class="prod__name">Cortado en vaso</h3><span class="prod__price">$2.800</span></div>
+                <p class="prod__desc">Mitad espresso, mitad leche. Lo pide medio barrio a las 8 de la mañana, camino al metro.</p>
+              </figcaption>
+            </figure>
+
+            <figure class="prod">
+              <img src="img/helado-scone-700.webp"
+                   srcset="img/helado-scone-700.webp 700w, img/helado-scone-1300.webp 1300w"
+                   sizes="(min-width: 860px) 46vw, 100vw" width="700" height="467" loading="lazy"
+                   alt="Moka helado con crema, scone en plato negro y café helado con leche">
+              <figcaption>
+                <div class="prod__row"><h3 class="prod__name">Café helado + scone</h3><span class="prod__price">$5.900</span></div>
+                <p class="prod__desc">Para los días de calor: cualquier café helado más un scone de queso o de naranja.</p>
+              </figcaption>
+            </figure>
+
+            <div class="menu">
+              <h3 class="menu__title">El resto de la carta</h3>
+              <div class="menu__groups">
+                <ul class="menu__list" aria-label="Café y bebidas">
+                  <li><span>Espresso</span><i></i><span>$2.000</span></li>
+                  <li><span>Americano</span><i></i><span>$2.500</span></li>
+                  <li><span>Latte</span><i></i><span>$3.400</span></li>
+                  <li><span>Flat white</span><i></i><span>$3.500</span></li>
+                  <li><span>Moka</span><i></i><span>$3.600</span></li>
+                  <li><span>Café de filtro</span><i></i><span>$2.600</span></li>
+                  <li><span>Té en hebras</span><i></i><span>$2.300</span></li>
+                </ul>
+                <ul class="menu__list" aria-label="Para comer">
+                  <li><span>Medialuna</span><i></i><span>$1.600</span></li>
+                  <li><span>Scone de queso</span><i></i><span>$2.300</span></li>
+                  <li><span>Queque de plátano</span><i></i><span>$2.200</span></li>
+                  <li><span>Tostada con palta</span><i></i><span>$4.200</span></li>
+                  <li><span>Marraqueta jamón queso</span><i></i><span>$4.500</span></li>
+                  <li><span>Pollo palta en ciabatta</span><i></i><span>$5.900</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA TRABAJAR -->
+    <section class="bleed" id="trabajar" aria-labelledby="trabajar-title">
+      <img class="bleed__img"
+           src="img/barra-1600.webp"
+           srcset="img/barra-960.webp 960w, img/barra-1600.webp 1600w, img/barra-2400.webp 2400w"
+           sizes="100vw" width="1600" height="1117" loading="lazy"
+           alt="Barista en la barra frente a la pizarra con la carta y una ventana grande">
+      <div class="bleed__shade" aria-hidden="true"></div>
+      <div class="bleed__content wrap">
+        <h2 id="trabajar-title" class="h2">Para trabajar<br>un rato largo.</h2>
+        <p class="bleed__lead">El segundo piso es la parte tranquila: mesas largas, luz de ventana hasta las seis y nadie te va a apurar. Si vienen en grupo a reunión, usen la mesa del fondo.</p>
+        <ul class="datos">
+          <li><strong data-count="300" data-suffix=" Mb">300 Mb</strong><span>Wifi por fibra. La clave viene impresa en la boleta.</span></li>
+          <li><strong data-count="22">22</strong><span>enchufes, casi uno por asiento en el segundo piso.</span></li>
+          <li><strong>2º piso</strong><span>sin música fuerte ni licuadora cerca.</span></li>
+          <li><strong data-count="1000" data-prefix="$">$1.000</strong><span>el rellenado de café de filtro si sigues trabajando.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PEDIDOS POR WHATSAPP -->
+    <section class="pedir" id="pedir" aria-labelledby="pedir-title">
+      <div class="pedir__grid">
+        <div class="pedir__text">
+          <h2 id="pedir-title" class="h2">Pídelo por WhatsApp y pasa a buscarlo.</h2>
+          <ol class="pasos">
+            <li><span class="pasos__n">1</span><p>Escríbenos qué quieres y a qué hora pasas.</p></li>
+            <li><span class="pasos__n">2</span><p>Te respondemos con el total y la hora en que queda listo. Casi siempre son 10 minutos.</p></li>
+            <li><span class="pasos__n">3</span><p>Lo retiras en la barra, al lado de la caja. Pagas ahí con tarjeta, efectivo o transferencia.</p></li>
+          </ol>
+          <p class="pedir__ejemplo">«Hola, 2 cortados con leche de avena y un scone de queso para las 8:15. A nombre de Paula.»</p>
+          <a class="btn btn--cream js-wa" href="#pedir">Escribir por WhatsApp</a>
+          <p class="pedir__nota">Recibimos pedidos desde las 7:30. No hacemos delivery: somos pocos y preferimos que el café llegue caliente.</p>
+        </div>
+        <div class="pedir__foto">
+          <img src="img/barista-800.webp"
+               srcset="img/barista-800.webp 800w, img/barista-1400.webp 1400w"
+               sizes="(min-width: 860px) 50vw, 100vw" width="800" height="533" loading="lazy"
+               alt="Barista preparando un café en la máquina de espresso, con tazas apiladas detrás">
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section class="historia" id="historia" aria-labelledby="historia-title">
+      <div class="wrap historia__grid">
+        <figure class="historia__foto">
+          <img src="img/ignacio-600.webp"
+               srcset="img/ignacio-600.webp 600w, img/ignacio-1100.webp 1100w"
+               sizes="(min-width: 860px) 40vw, 100vw" width="600" height="900" loading="lazy"
+               alt="Ignacio, dueño de Café Andén, sonriendo en la barra con una taza en la mano">
+          <figcaption>Ignacio en la barra, un martes a las nueve.</figcaption>
+        </figure>
+        <div class="historia__text">
+          <h2 id="historia-title" class="h2">Antes aquí había una ferretería.</h2>
+          <p>Ignacio Fuentes estuvo nueve años detrás de barras ajenas en Providencia. En 2019 arrendó el local de la esquina, el que fue la ferretería de don Julio por casi treinta años, y lo arregló con su hermano un fin de semana tras otro. Los estantes del fondo son los mismos.</p>
+          <p>Le puso Andén porque la mitad de la gente que entra viene saliendo del metro, apurada. La otra mitad se queda toda la mañana. Las dos cosas nos parecen bien.</p>
+          <p>Hoy somos seis. Carmen, la mamá de Ignacio, hace las tortas; el pan llega a las siete desde una panadería de la calle Dublé Almeyda.</p>
+          <dl class="historia__datos">
+            <div><dt>Abrimos</dt><dd>Marzo 2019</dd></div>
+            <div><dt>Equipo</dt><dd>6 personas</dd></div>
+            <div><dt>Cafés al día</dt><dd data-count="340" data-prefix="Unos ">Unos 340</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO LLEGAR -->
+    <section class="llegar" id="llegar" aria-labelledby="llegar-title">
+      <div class="llegar__grid">
+        <div class="llegar__info">
+          <h2 id="llegar-title" class="h2">Cómo llegar.</h2>
+          <p class="llegar__dir">Av. Irarrázaval 2940, Ñuñoa.<br><span>A media cuadra del metro Irarrázaval.</span></p>
+
+          <dl class="llegar__como">
+            <div><dt>En metro</dt><dd>Estación Irarrázaval, Líneas 3 y 5. Sales y caminas media cuadra.</dd></div>
+            <div><dt>En bici</dt><dd>Cicletero frente a la puerta, para cuatro bicis.</dd></div>
+            <div><dt>En auto</dt><dd>No tenemos estacionamiento; hay en la calle, con parquímetro.</dd></div>
+          </dl>
+
+          <div class="llegar__horario">
+          <div class="llegar__horario-head">
+            <h3 class="h3">Horario</h3>
+            <p class="estado" id="estado" hidden></p>
+          </div>
+          <ul class="horario" id="horario">
+            <li data-days="1"><span>Lunes</span><span>7:30 – 20:30</span></li>
+            <li data-days="2"><span>Martes</span><span>7:30 – 20:30</span></li>
+            <li data-days="3"><span>Miércoles</span><span>7:30 – 20:30</span></li>
+            <li data-days="4"><span>Jueves</span><span>7:30 – 20:30</span></li>
+            <li data-days="5"><span>Viernes</span><span>7:30 – 20:30</span></li>
+            <li data-days="6"><span>Sábado</span><span>9:00 – 20:00</span></li>
+            <li data-days="0"><span>Domingo</span><span>Cerrado</span></li>
+          </ul>
+          <p class="llegar__nota">Feriados abrimos de 9:00 a 15:00, salvo el 18 de septiembre y Año Nuevo.</p>
+          </div>
+        </div>
+
+        <div class="mapa" id="mapa">
+          <img class="mapa__fallback"
+               src="img/local-960.webp"
+               srcset="img/local-960.webp 960w, img/local-1600.webp 1600w"
+               sizes="(min-width: 860px) 50vw, 100vw" width="960" height="597" loading="lazy"
+               alt="Interior de Café Andén">
+          <iframe class="mapa__frame" title="Mapa: Café Andén, a media cuadra del metro Irarrázaval"
+                  data-src="https://www.google.com/maps/embed/v1/place?key=__GOOGLE_MAPS_API_KEY__&amp;q=Metro+Irarr%C3%A1zaval,+%C3%91u%C3%B1oa&amp;zoom=16&amp;language=es&amp;region=CL"
+                  loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <a class="btn btn--cream mapa__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Metro+Irarr%C3%A1zaval+%C3%91u%C3%B1oa" target="_blank" rel="noopener">Ver ruta en Google Maps</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="footer__brand">Café Andén</p>
+        <p>Av. Irarrázaval 2940, Ñuñoa<br>Lun a vie 7:30–20:30 · Sáb 9:00–20:00</p>
+      </div>
+      <div class="footer__demo">
+        <p>Sitio de demostración · negocio ficticio</p>
+        <p><a href="https://sotodev.cl" target="_blank" rel="noopener">Made by Soto Dev</a></p>
+      </div>
+    </div>
+    <div class="wrap footer__credits">
+      Fotos de Unsplash: Qiming Chen, Louis Hansel, Macarena Navarro, Seungmin Yoon, Supradoc y Manuel Figueroa.
+    </div>
+  </footer>
+
+  <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1">Pedir por WhatsApp para retirar</a>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
