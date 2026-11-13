@@ -9,9 +9,9 @@
   --muted: #7A6257;
   --line: #F1E1D5;
   --on-brown: rgba(251, 239, 230, 0.82);
-  --wa: #25D366;            /* WhatsApp green, dark text for AA */
-  --wa-hover: #3BDB78;
-  --on-wa: #0B2E17;
+  --wa: #14833E;            /* deep WhatsApp green: white text passes AA (4.8:1) */
+  --wa-hover: #0F6F33;
+  --on-wa: #FFFFFF;
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1200px;
   --r-lg: 32px;

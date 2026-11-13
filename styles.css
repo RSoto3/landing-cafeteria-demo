@@ -10,9 +10,9 @@
   --accent-text: #E07A3F;   /* text only, on navy or photos */
   --on-accent: #FFFFFF;
   --on-dark: rgba(238, 240, 241, 0.82);
-  --wa: #25D366;            /* WhatsApp green, dark text for AA */
-  --wa-hover: #3BDB78;
-  --on-wa: #0B2E17;
+  --wa: #14833E;            /* deep WhatsApp green: white text passes AA (4.8:1) */
+  --wa-hover: #0F6F33;
+  --on-wa: #FFFFFF;
   --gutter: clamp(16px, 4.5vw, 56px);
   --max: 1200px;
   --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -82,17 +82,17 @@ a { color: inherit; }
 .btn--outline:hover { background: var(--paper); color: var(--navy); }
 .btn--accent { background: var(--accent); color: var(--on-accent); }
 .btn--accent:hover { background: var(--accent-dark); }
-.btn--wa { gap: .5rem; background: var(--wa); color: var(--on-wa); }
+.btn--wa { gap: .5rem; border-radius: 8px; background: var(--wa); color: var(--on-wa); }
 .btn--wa:hover { background: var(--wa-hover); }
 .wa-icon { width: 1.2em; height: 1.2em; flex: none; }
 
 /* ---------- Design switch ---------- */
 .switch {
   display: inline-flex; flex: none;
-  border: 1.5px solid var(--paper); border-radius: 3px;
+  border: 1.5px solid var(--paper); border-radius: 8px;
   font-size: .8rem; font-weight: 600;
 }
-.switch a { padding: .5rem .7rem; border-radius: 1px; text-decoration: none; color: var(--paper); white-space: nowrap; }
+.switch a { padding: .5rem .7rem; border-radius: 6px; text-decoration: none; color: var(--paper); white-space: nowrap; }
 .switch a:focus-visible { outline-offset: -4px; }
 .switch a[aria-current="page"]:focus-visible { outline-color: var(--navy); }
 .switch a:hover { background: rgba(238,240,241,.15); }
@@ -417,7 +417,7 @@ a { color: inherit; }
     gap: .5rem;
     background: var(--wa);
     color: var(--on-wa);
-    border-radius: 3px;
+    border-radius: 10px;
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 6px 24px rgba(16,21,34,.28);

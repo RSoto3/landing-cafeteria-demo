@@ -130,10 +130,10 @@ test('every WhatsApp button is WhatsApp green with its icon', () => {
   }
   for (const f of ['styles.css', 'calido.css']) {
     const css = read(f);
-    assert.match(css, /--wa: #25D366/);
-    assert.match(css, /--on-wa: #0B2E17/);
+    assert.match(css, /--wa: #14833E/);
+    assert.match(css, /--on-wa: #FFFFFF/);
   }
-  assert.ok(contrast('#0B2E17', '#25D366') >= 4.5);
+  assert.ok(contrast('#FFFFFF', '#14833E') >= 4.5);
 });
 
 test('focus rings stay visible on the new controls', () => {
@@ -157,4 +157,10 @@ test('D2 cards stay visible; their photos animate instead', () => {
   const js = read('calido.js');
   assert.ok(!/'\.card'/.test(js), 'cards must not be hidden by the reveal');
   assert.match(js, /images:\s*'[^']*\.card__img/);
+});
+
+test('D1 WhatsApp button and design switch use soft 8px corners', () => {
+  const css = read('styles.css');
+  assert.match(css, /\.btn--wa \{[^}]*border-radius: 8px/);
+  assert.match(css, /\.switch \{[^}]*border-radius: 8px/);
 });
