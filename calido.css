@@ -9,6 +9,9 @@
   --muted: #7A6257;
   --line: #F1E1D5;
   --on-brown: rgba(251, 239, 230, 0.82);
+  --wa: #25D366;            /* WhatsApp green, dark text for AA */
+  --wa-hover: #3BDB78;
+  --on-wa: #0B2E17;
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1200px;
   --r-lg: 32px;
@@ -20,7 +23,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -78,6 +81,9 @@ a { color: inherit; }
 .pill--peach { background: var(--peach); }
 .pill--peach:hover { background: #F9C4A6; }
 .pill--dark { background: var(--brown); color: var(--bg); }
+.pill--wa { background: var(--wa); color: var(--on-wa); }
+.pill--wa:hover { background: var(--wa-hover); }
+.wa-icon { width: 1.2em; height: 1.2em; flex: none; }
 .pill--light { background: var(--bg); }
 
 /* ---------- Hero ---------- */
@@ -104,8 +110,19 @@ a { color: inherit; }
     linear-gradient(to bottom, rgba(40,22,14,.35) 0%, rgba(40,22,14,0) 20%);
 }
 .nav {
+  position: fixed; top: 28px; left: 28px; right: 28px; z-index: 40;
   display: flex; align-items: center; gap: .75rem;
-  padding: 16px;
+}
+/* the hero keeps room for the fixed nav */
+.hero__frame { padding-top: 76px; }
+/* once scrolled, the pills sit together in one frosted capsule */
+.nav { border-radius: 999px; transition: background-color .3s, box-shadow .3s, padding .3s; }
+.nav.is-scrolled {
+  padding: 5px;
+  background: rgba(251, 239, 230, .9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 28px rgba(40,22,14,.18);
 }
 .nav__logo {
   font: 800 1.6rem/1 var(--display); letter-spacing: -0.04em;
@@ -131,15 +148,6 @@ a { color: inherit; }
 .switch a { padding: .45rem .8rem; border-radius: 999px; text-decoration: none; color: var(--brown); white-space: nowrap; }
 .switch a:hover { background: var(--white); }
 .switch a[aria-current="page"] { background: var(--brown); color: var(--bg); }
-/* floating copy, shown by shared.js once the hero is off screen */
-.switch--float {
-  position: fixed; top: 12px; right: 12px; z-index: 30;
-  background: var(--bg);
-  box-shadow: 0 6px 20px rgba(40,22,14,.22);
-  transform: translateY(-160%);
-  transition: transform .3s var(--ease);
-}
-.switch--float.is-visible { transform: none; }
 
 .hero__content {
   margin-top: auto;
@@ -262,7 +270,7 @@ a { color: inherit; }
 .order__note { margin-top: 1.5rem; max-width: 26rem; font-size: .9rem; color: rgba(251,239,230,.72); }
 .order__photo { position: relative; padding: 0 12px 12px; }
 @media (min-width: 900px) { .order__photo { padding: 12px; } }
-.order__img { height: 100%; min-height: 320px; border-radius: var(--r-md); overflow: hidden; }
+.order__img { height: 100%; min-height: 320px; border-radius: var(--r-md); overflow: hidden; background: var(--brown-2); }
 .order__img img { width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; }
 .bubble {
   position: absolute; left: 24px; right: 24px; bottom: 32px;
@@ -343,6 +351,7 @@ a { color: inherit; }
 .wa-bar { display: none; }
 
 @media (max-width: 859px) {
+  .nav { top: 20px; left: 20px; right: 20px; }
   .nav__links { display: none; }
   .nav__wa { display: none; }
   .hero__content { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -357,7 +366,8 @@ a { color: inherit; }
     bottom: calc(12px + env(safe-area-inset-bottom));
     z-index: 20;
     min-height: 52px;
-    background: var(--brown); color: var(--bg);
+    gap: .5rem;
+    background: var(--wa); color: var(--on-wa);
     border-radius: 999px;
     font-weight: 600; text-decoration: none;
     box-shadow: 0 6px 24px rgba(40,22,14,.3);
@@ -389,7 +399,18 @@ a { color: inherit; }
 }
 .js .reveal.is-in { opacity: 1; transform: none; }
 
+/* photos: the frame (with its warm background) is always there; the photo
+   fades in from a slight zoom as soon as it peeks into view */
+.js .reveal-img { overflow: hidden; }
+.js .reveal-img img {
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity .9s var(--ease), transform 1.4s var(--ease);
+}
+.js .reveal-img.is-in img { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .js *, .js *::before, .js *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
+  .js .reveal-img img { opacity: 1; transform: none; }
 }

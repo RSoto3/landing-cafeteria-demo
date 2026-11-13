@@ -1,6 +1,6 @@
 // Diseño 2. Shared logic (WhatsApp, hours, map, mobile bar, reveal) lives in shared.js.
 import {
-  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch,
+  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav,
 } from './shared.js';
 
 initWhatsApp();
@@ -8,18 +8,20 @@ initStatus();
 initWaBar(['#inicio', '#pedir', '.footer']);
 initMap();
 initDesignSwitch();
+initStickyNav('.nav');
 
 initReveal({
   groups: [
     '.sec-head > *',
-    '.card',
+    '.card__row, .card__desc',
     '.rest',
     '.work__text > *',
     '.tile',
     '.order__text > *',
     '.story__text > *',
-    '.visit > *',
+    '.visit__box',
   ],
+  images: '.card__img, .arch, .order__img, .story__img, .mapa',
 });
 
 // Menu tabs: without JS both lists show with their titles

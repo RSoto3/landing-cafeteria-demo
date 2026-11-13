@@ -112,12 +112,28 @@ test('both designs carry the switch, current one marked', () => {
   assert.match(d2, /data-design-link="\/calido" href="\/calido" aria-current="page"/);
 });
 
-test('both designs have a floating switch for when the hero is off screen', () => {
+test('the nav is fixed in both designs, so the switch is always reachable (no floating copy)', () => {
   for (const f of ['index.html', 'calido.html']) {
     const html = read(f);
-    assert.ok(html.includes('class="switch switch--float"'), `${f} missing floating switch`);
-    assert.equal((html.match(/data-design-link=/g) || []).length, 4, `${f} should have 4 switch links`);
+    assert.ok(!html.includes('switch--float'), `${f} still has the floating switch`);
+    assert.equal((html.match(/data-design-link=/g) || []).length, 2, `${f} should have 2 switch links`);
   }
+  assert.match(read('styles.css'), /\.topbar \{[^}]*position: fixed/);
+  assert.match(read('calido.css'), /\.nav \{[^}]*position: fixed/);
+});
+
+test('every WhatsApp button is WhatsApp green with its icon', () => {
+  for (const f of ['index.html', 'calido.html']) {
+    const buttons = [...read(f).matchAll(/<a [^>]*js-wa[^>]*>([\s\S]*?)<\/a>/g)];
+    assert.ok(buttons.length >= 3, `${f}: expected WhatsApp buttons`);
+    for (const [, inner] of buttons) assert.ok(inner.includes('class="wa-icon"'), `${f}: WhatsApp button without icon`);
+  }
+  for (const f of ['styles.css', 'calido.css']) {
+    const css = read(f);
+    assert.match(css, /--wa: #25D366/);
+    assert.match(css, /--on-wa: #0B2E17/);
+  }
+  assert.ok(contrast('#0B2E17', '#25D366') >= 4.5);
 });
 
 test('focus rings stay visible on the new controls', () => {
@@ -127,4 +143,18 @@ test('focus rings stay visible on the new controls', () => {
   const d2 = read('calido.css');
   const focus = d2.match(/:focus-visible \{[^}]*\}/)[0];
   assert.ok(!focus.includes('currentColor'), 'D2 focus ring uses currentColor (invisible on pressed tab)');
+});
+
+test('CSS and JS revalidate on every visit so a deploy never mixes old styles with new HTML', () => {
+  const headers = read('_headers');
+  for (const pattern of ['/*.css', '/*.js']) {
+    const block = headers.split(pattern)[1].split(/\n\S/)[0];
+    assert.match(block, /Cache-Control: public, max-age=0, must-revalidate/, `${pattern} is cached without revalidation`);
+  }
+});
+
+test('D2 cards stay visible; their photos animate instead', () => {
+  const js = read('calido.js');
+  assert.ok(!/'\.card'/.test(js), 'cards must not be hidden by the reveal');
+  assert.match(js, /images:\s*'[^']*\.card__img/);
 });

@@ -1,6 +1,6 @@
 // Diseño 1. Shared logic (WhatsApp, hours, map, mobile bar, reveal) lives in shared.js.
 import {
-  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, prefersReducedMotion,
+  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav, prefersReducedMotion,
 } from './shared.js';
 
 initWhatsApp();
@@ -8,6 +8,7 @@ initStatus();
 initWaBar(['.hero', '#pedir', '.footer']);
 initMap();
 initDesignSwitch();
+initStickyNav('#topbar');
 
 initReveal({
   groups: [

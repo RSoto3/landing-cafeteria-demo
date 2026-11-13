@@ -36,6 +36,7 @@
          fetchpriority="high">
     <div class="hero__shade" aria-hidden="true"></div>
 
+    <div class="topbar" id="topbar">
     <nav class="nav wrap" aria-label="Principal">
       <a class="nav__brand" href="#inicio">Café Andén</a>
       <ul class="nav__links">
@@ -47,8 +48,9 @@
         <a data-design-link="/" href="/" aria-current="page">Diseño 1</a>
         <a data-design-link="/calido" href="/calido">Diseño 2</a>
       </div>
-      <a class="btn btn--light btn--sm nav__wa js-wa" href="#pedir">Pedir por WhatsApp</a>
+      <a class="btn btn--wa btn--sm nav__wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp</a>
     </nav>
+    </div>
 
     <div class="hero__content wrap">
       <h1 class="hero__title"><span class="w" style="--i:0">Café</span> <span class="w" style="--i:1">de</span> <span class="w" style="--i:2">barrio,</span> <span class="hero__accent"><span class="w" style="--i:3">bien</span> <span class="w" style="--i:4">hecho.</span></span></h1>
@@ -176,7 +178,7 @@
             <li><span class="pasos__n">3</span><p>Lo retiras en la barra, al lado de la caja. Pagas ahí con tarjeta, efectivo o transferencia.</p></li>
           </ol>
           <p class="pedir__ejemplo">«Hola, 2 cortados con leche de avena y un scone de queso para las 8:15. A nombre de Paula.»</p>
-          <a class="btn btn--accent js-wa" href="#pedir">Escribir por WhatsApp</a>
+          <a class="btn btn--wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Escribir por WhatsApp</a>
           <p class="pedir__nota">Recibimos pedidos desde las 7:30. No hacemos delivery: somos pocos y preferimos que el café llegue caliente.</p>
         </div>
         <div class="pedir__foto">
@@ -276,12 +278,7 @@
     </div>
   </footer>
 
-  <div class="switch switch--float" role="group" aria-label="Elegir diseño" inert>
-    <a data-design-link="/" href="/" aria-current="page">Diseño 1</a>
-    <a data-design-link="/calido" href="/calido">Diseño 2</a>
-  </div>
-
-  <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1">Pedir por WhatsApp para retirar</a>
+  <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp para retirar</a>
 
   <script type="module" src="main.js"></script>
 </body>

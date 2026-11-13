@@ -112,8 +112,7 @@ export function initMap() {
   }
 }
 
-// Keeps each "Diseño 1 / Diseño 2" link pointing at the section currently on screen,
-// and shows the floating copy of the switch once the hero (and its nav) is off screen
+// Keeps each "Diseño 1 / Diseño 2" link pointing at the section currently on screen
 export function initDesignSwitch() {
   const links = [...document.querySelectorAll('a[data-design-link]')];
   if (!links.length || !('IntersectionObserver' in window)) return;
@@ -127,15 +126,18 @@ export function initDesignSwitch() {
   }, { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.01, 0.5, 1] });
   SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean).forEach((s) => io.observe(s));
 
-  const float = document.querySelector('.switch--float');
-  const hero = document.getElementById('inicio');
-  if (float && hero) {
-    new IntersectionObserver(([e]) => {
-      const show = !e.isIntersecting;
-      float.classList.toggle('is-visible', show);
-      float.inert = !show;
-    }, { threshold: 0 }).observe(hero);
-  }
+}
+
+// Fixed nav: marks it .is-scrolled once the page leaves the very top
+export function initStickyNav(selector) {
+  const nav = document.querySelector(selector);
+  if (!nav) return;
+  let ticking = false;
+  const update = () => { ticking = false; nav.classList.toggle('is-scrolled', window.scrollY > 40); };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
 }
 
 // Count-up numbers (formatted es-CL: 1.000)
@@ -155,36 +157,62 @@ function countUp(el) {
   requestAnimationFrame(step);
 }
 
+// When reveals fire. Photos start on their first visible pixel; text a little before
+// it is fully on screen. Exported so the timing is pinned by tests.
+export const REVEAL_OBSERVERS = {
+  text: { rootMargin: '0px 0px -8% 0px', threshold: 0 },
+  images: { rootMargin: '0px 0px 0px 0px', threshold: 0 },
+};
+
+// Resolves once every <img> inside el has its pixels ready (or failed), so the
+// unveil animates the photo and never an empty box on slow or high-DPI screens
+function imagesReady(el) {
+  const imgs = el.tagName === 'IMG' ? [el] : [...el.querySelectorAll('img')];
+  return Promise.all(imgs.map((img) => {
+    if (img.loading === 'lazy') img.loading = 'eager';
+    return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+  }));
+}
+
+function reveal(el) {
+  el.classList.add('is-in');
+  el.querySelectorAll?.('[data-count]').forEach(countUp);
+  if (el.matches('[data-count]')) countUp(el);
+}
+
 // Scroll reveal: siblings in the same group get a staggered delay
 export function initReveal({ groups, images }) {
-  const targets = [];
+  const texts = [];
   groups.forEach((sel) => {
     document.querySelectorAll(sel).forEach((el, i) => {
       el.classList.add('reveal');
       el.style.setProperty('--d', `${Math.min(i, 8) * 0.08}s`);
-      targets.push(el);
+      texts.push(el);
     });
   });
-  if (images) {
-    document.querySelectorAll(images).forEach((el) => {
-      el.classList.add('reveal-img');
-      targets.push(el);
-    });
-  }
+  const photos = images ? [...document.querySelectorAll(images)] : [];
+  photos.forEach((el) => el.classList.add('reveal-img'));
 
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    targets.forEach((el) => el.classList.add('is-in'));
-    return targets;
+    [...texts, ...photos].forEach(reveal);
+    return;
   }
-  const revealIO = new IntersectionObserver((entries) => {
+
+  const textIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
-      e.target.classList.add('is-in');
-      e.target.querySelectorAll?.('[data-count]').forEach(countUp);
-      if (e.target.matches('[data-count]')) countUp(e.target);
-      revealIO.unobserve(e.target);
+      reveal(e.target);
+      textIO.unobserve(e.target);
     });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-  targets.forEach((el) => revealIO.observe(el));
-  return targets;
+  }, REVEAL_OBSERVERS.text);
+  texts.forEach((el) => textIO.observe(el));
+
+  const photoIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      photoIO.unobserve(e.target);
+      imagesReady(e.target).then(() => reveal(e.target));
+    });
+  }, REVEAL_OBSERVERS.images);
+  photos.forEach((el) => photoIO.observe(el));
 }

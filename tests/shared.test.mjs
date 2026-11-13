@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { statusText, designHref, nextSection } from '../shared.js';
+import { statusText, designHref, nextSection, REVEAL_OBSERVERS } from '../shared.js';
 
 test('statusText: open on a weekday morning', () => {
   assert.deepEqual(statusText(1, 10), { open: true, text: 'Abierto ahora · cierra a las 20:30' });
@@ -44,4 +44,14 @@ test('nextSection: picks the section with the largest visible ratio', () => {
 
 test('nextSection: keeps the last section when none is visible (footer)', () => {
   assert.equal(nextSection('llegar', new Map([['llegar', 0], ['historia', 0]])), 'llegar');
+});
+
+test('photos start their reveal as soon as their first pixel enters the screen', () => {
+  assert.equal(REVEAL_OBSERVERS.images.threshold, 0);
+  assert.equal(REVEAL_OBSERVERS.images.rootMargin, '0px 0px 0px 0px');
+});
+
+test('text reveals no later than 8% above the bottom of the screen', () => {
+  assert.equal(REVEAL_OBSERVERS.text.threshold, 0);
+  assert.equal(REVEAL_OBSERVERS.text.rootMargin, '0px 0px -8% 0px');
 });
