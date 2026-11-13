@@ -1,6 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "landing-cafeteria-demo",
+  // Personal account (Rodrigo Soto · Proyectos), never the work one
+  "account_id": "23656c488ed6e75f36c81a0fa8d41818",
   "compatibility_date": "2026-11-01",
   // Static assets only, no Worker script. _headers in dist/ is applied.
   "build": { "command": "node build.mjs" },
