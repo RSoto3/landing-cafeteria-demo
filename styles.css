@@ -363,6 +363,8 @@ a { color: inherit; }
   .footer__demo { text-align: right; }
 }
 .footer__brand { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--cream); margin-bottom: .5rem; }
+.footer__pitch { margin: .35rem 0 .5rem; max-width: 26rem; color: var(--cream); }
+@media (min-width: 700px) { .footer__pitch { margin-left: auto; } }
 .footer__demo a { color: var(--cream); font-weight: 600; text-underline-offset: 4px; }
 .footer__credits { margin-top: 2.5rem; font-size: .8rem; color: rgba(244,237,225,.5); }
 

@@ -7,6 +7,8 @@
   <title>Café Andén · Café de barrio en Ñuñoa</title>
   <meta name="description" content="Cafetería de barrio a media cuadra del metro Irarrázaval. Café tostado en Santiago, horneado del día, wifi y enchufes, pedidos por WhatsApp para retirar.">
   <meta name="theme-color" content="#31402D">
+  <!-- Fictional business at a real street: keep it out of search results -->
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <meta property="og:type" content="website">
@@ -176,8 +178,8 @@
         </div>
         <div class="pedir__foto">
           <img src="img/barista-800.webp"
-               srcset="img/barista-800.webp 800w, img/barista-1400.webp 1400w"
-               sizes="(min-width: 860px) 50vw, 100vw" width="800" height="533" loading="lazy"
+               srcset="img/barista-800.webp 800w, img/barista-1400.webp 1400w, img/barista-2000.webp 2000w"
+               sizes="(min-width: 860px) 150vh, 100vw" width="800" height="533" loading="lazy"
                alt="Barista preparando un café en la máquina de espresso, con tazas apiladas detrás">
         </div>
       </div>
@@ -241,8 +243,8 @@
         <div class="mapa" id="mapa">
           <img class="mapa__fallback"
                src="img/local-960.webp"
-               srcset="img/local-960.webp 960w, img/local-1600.webp 1600w"
-               sizes="(min-width: 860px) 50vw, 100vw" width="960" height="597" loading="lazy"
+               srcset="img/local-960.webp 960w, img/local-1600.webp 1600w, img/local-2400.webp 2400w"
+               sizes="(min-width: 860px) 165vh, 700px" width="960" height="597" loading="lazy"
                alt="Interior de Café Andén">
           <iframe class="mapa__frame" title="Mapa: Café Andén, a media cuadra del metro Irarrázaval"
                   data-src="https://www.google.com/maps/embed/v1/place?key=__GOOGLE_MAPS_API_KEY__&amp;q=Metro+Irarr%C3%A1zaval,+%C3%91u%C3%B1oa&amp;zoom=16&amp;language=es&amp;region=CL"
@@ -262,7 +264,8 @@
       </div>
       <div class="footer__demo">
         <p>Sitio de demostración · negocio ficticio</p>
-        <p><a href="https://sotodev.cl" target="_blank" rel="noopener">Made by Soto Dev</a></p>
+        <p class="footer__pitch">¿Tienes un local de barrio? Hago páginas como esta: carta, horario, mapa y pedidos por WhatsApp.</p>
+        <p><a href="https://sotodev.cl" target="_blank" rel="noopener">Made by Soto Dev · sotodev.cl</a></p>
       </div>
     </div>
     <div class="wrap footer__credits">

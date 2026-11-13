@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "landing-cafeteria-demo",
+  "compatibility_date": "2026-11-01",
+  // Static assets only, no Worker script. _headers in dist/ is applied.
+  "build": { "command": "node build.mjs" },
+  "assets": { "directory": "./dist" },
+  "routes": [{ "pattern": "cafeteria.sotodev.cl", "custom_domain": true }]
+}
