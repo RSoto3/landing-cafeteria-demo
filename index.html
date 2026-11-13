@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Café Andén · Café de barrio en Ñuñoa</title>
   <meta name="description" content="Cafetería de barrio a media cuadra del metro Irarrázaval. Café tostado en Santiago, horneado del día, wifi y enchufes, pedidos por WhatsApp para retirar.">
-  <meta name="theme-color" content="#31402D">
+  <meta name="theme-color" content="#1E2638">
   <!-- Fictional business at a real street: keep it out of search results -->
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -43,17 +43,20 @@
         <li><a href="#trabajar">Para trabajar</a></li>
         <li><a href="#llegar">Cómo llegar</a></li>
       </ul>
-      <a class="btn btn--cream btn--sm js-wa" href="#pedir">Pedir por WhatsApp</a>
+      <div class="switch" role="group" aria-label="Elegir diseño">
+        <a data-design-link="/" href="/" aria-current="page">Diseño 1</a>
+        <a data-design-link="/calido" href="/calido">Diseño 2</a>
+      </div>
+      <a class="btn btn--light btn--sm nav__wa js-wa" href="#pedir">Pedir por WhatsApp</a>
     </nav>
 
     <div class="hero__content wrap">
-      <h1 class="hero__title"><span class="line"><span>Café de barrio,</span></span> <span class="line"><span>bien hecho.</span></span></h1>
+      <h1 class="hero__title"><span class="w" style="--i:0">Café</span> <span class="w" style="--i:1">de</span> <span class="w" style="--i:2">barrio,</span> <span class="hero__accent"><span class="w" style="--i:3">bien</span> <span class="w" style="--i:4">hecho.</span></span></h1>
       <p class="hero__lead">Tostamos en Santiago, horneamos todas las mañanas y tenemos mesas largas para quedarse. A media cuadra del metro Irarrázaval.</p>
       <div class="hero__actions">
-        <a class="btn btn--cream" href="#carta">Ver la carta</a>
-        <a class="btn btn--outline" href="#llegar">Cómo llegar</a>
+        <a class="btn btn--accent" href="#carta">Ver la carta</a>
+        <a class="btn btn--outline" href="#pedir">Pedir para retirar</a>
       </div>
-      <p class="hero__meta">Lun a vie 7:30–20:30 · Sábado 9:00–20:00 · Wifi y enchufes · Terraza con perros bienvenidos</p>
     </div>
   </header>
 
@@ -173,7 +176,7 @@
             <li><span class="pasos__n">3</span><p>Lo retiras en la barra, al lado de la caja. Pagas ahí con tarjeta, efectivo o transferencia.</p></li>
           </ol>
           <p class="pedir__ejemplo">«Hola, 2 cortados con leche de avena y un scone de queso para las 8:15. A nombre de Paula.»</p>
-          <a class="btn btn--cream js-wa" href="#pedir">Escribir por WhatsApp</a>
+          <a class="btn btn--accent js-wa" href="#pedir">Escribir por WhatsApp</a>
           <p class="pedir__nota">Recibimos pedidos desde las 7:30. No hacemos delivery: somos pocos y preferimos que el café llegue caliente.</p>
         </div>
         <div class="pedir__foto">
@@ -225,7 +228,7 @@
           <div class="llegar__horario">
           <div class="llegar__horario-head">
             <h3 class="h3">Horario</h3>
-            <p class="estado" id="estado" hidden></p>
+            <p class="estado" id="estado" data-estado hidden></p>
           </div>
           <ul class="horario" id="horario">
             <li data-days="1"><span>Lunes</span><span>7:30 – 20:30</span></li>
@@ -249,7 +252,7 @@
           <iframe class="mapa__frame" title="Mapa: Café Andén, a media cuadra del metro Irarrázaval"
                   data-src="https://www.google.com/maps/embed/v1/place?key=__GOOGLE_MAPS_API_KEY__&amp;q=Metro+Irarr%C3%A1zaval,+%C3%91u%C3%B1oa&amp;zoom=16&amp;language=es&amp;region=CL"
                   loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <a class="btn btn--cream mapa__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Metro+Irarr%C3%A1zaval+%C3%91u%C3%B1oa" target="_blank" rel="noopener">Ver ruta en Google Maps</a>
+          <a class="btn btn--light mapa__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Metro+Irarr%C3%A1zaval+%C3%91u%C3%B1oa" target="_blank" rel="noopener">Ver ruta en Google Maps</a>
         </div>
       </div>
     </section>
@@ -273,8 +276,13 @@
     </div>
   </footer>
 
+  <div class="switch switch--float" role="group" aria-label="Elegir diseño" inert>
+    <a data-design-link="/" href="/" aria-current="page">Diseño 1</a>
+    <a data-design-link="/calido" href="/calido">Diseño 2</a>
+  </div>
+
   <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1">Pedir por WhatsApp para retirar</a>
 
-  <script src="main.js" defer></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>

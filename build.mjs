@@ -4,7 +4,8 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 
 const OUT = 'dist';
-const FILES = ['index.html', 'styles.css', 'main.js', 'favicon.svg', '_headers', 'img'];
+const PAGES = ['index.html', 'calido.html'];
+const FILES = [...PAGES, 'styles.css', 'main.js', 'shared.js', 'calido.css', 'calido.js', 'favicon.svg', '_headers', 'img'];
 
 function readDotEnv() {
   if (!existsSync('.env')) return {};
@@ -25,12 +26,11 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT);
 for (const f of FILES) cpSync(f, `${OUT}/${f}`, { recursive: true });
 
-let html = readFileSync('index.html', 'utf8');
-if (key) {
-  html = html.replaceAll('__GOOGLE_MAPS_API_KEY__', encodeURIComponent(key));
-  console.log('Map: key injected');
-} else {
-  console.warn('Map: GOOGLE_MAPS_API_KEY not set, photo fallback will be shown');
+for (const page of PAGES) {
+  let html = readFileSync(page, 'utf8');
+  if (key) html = html.replaceAll('__GOOGLE_MAPS_API_KEY__', encodeURIComponent(key));
+  writeFileSync(`${OUT}/${page}`, html);
 }
-writeFileSync(`${OUT}/index.html`, html);
+if (key) console.log('Map: key injected');
+else console.warn('Map: GOOGLE_MAPS_API_KEY not set, photo fallback will be shown');
 console.log(`Built to ${OUT}/`);
