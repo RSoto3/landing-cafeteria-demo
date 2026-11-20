@@ -1,6 +1,6 @@
 // Diseño 2. Shared logic (WhatsApp, hours, map, mobile bar, reveal) lives in shared.js.
 import {
-  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav,
+  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav, initMenu,
 } from './shared.js';
 
 initWhatsApp();
@@ -10,19 +10,10 @@ initMap();
 initDesignSwitch();
 initStickyNav('.nav');
 
-initReveal({
-  groups: [
-    '.sec-head > *',
-    '.card__row, .card__desc',
-    '.rest',
-    '.work__text > *',
-    '.tile',
-    '.order__text > *',
-    '.story__text > *',
-    '.visit__box',
-  ],
-  images: '.card__img, .arch, .order__img, .story__img, .mapa',
-});
+initMenu();
+
+// Photos are the one scroll motion; text is simply there
+initReveal('.card__img, .arch, .order__img, .story__img, .mapa');
 
 // Menu tabs: without JS both lists show with their titles
 const rest = document.getElementById('rest');

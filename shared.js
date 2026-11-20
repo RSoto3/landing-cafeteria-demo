@@ -28,15 +28,15 @@ function fmt(h) {
 export function statusText(day, hour) {
   const today = HOURS[day];
   if (today && hour >= today[0] && hour < today[1]) {
-    return { open: true, text: `Abierto ahora · cierra a las ${fmt(today[1])}` };
+    return { open: true, text: `Abierto ahora, cierra a las ${fmt(today[1])}` };
   }
   if (today && hour < today[0]) {
-    return { open: false, text: `Cerrado · abre hoy a las ${fmt(today[0])}` };
+    return { open: false, text: `Cerrado. Abre hoy a las ${fmt(today[0])}` };
   }
   let d = (day + 1) % 7;
   while (!HOURS[d]) d = (d + 1) % 7;
   const when = d === (day + 1) % 7 ? 'mañana' : `el ${DAY_NAMES[d]}`;
-  return { open: false, text: `Cerrado · abre ${when} a las ${fmt(HOURS[d][0])}` };
+  return { open: false, text: `Cerrado. Abre ${when} a las ${fmt(HOURS[d][0])}` };
 }
 
 // The section with the largest visible ratio; keeps the previous one when none is
@@ -103,13 +103,22 @@ export function initWaBar(hideSelectors) {
   hideSelectors.map((s) => document.querySelector(s)).forEach((s) => s && io.observe(s));
 }
 
-// build.mjs injects the key; without it (e.g. a local server) the photo stays.
+// The Maps API key is restricted to the live domain. Anywhere else (wrangler dev,
+// a preview, a missing key) Google would show its "not authorized" error page, so
+// those get the plain keyless embed of the same place instead.
+export const MAP_HOST = 'cafeteria.sotodev.cl';
+export const MAP_KEYLESS = 'https://www.google.com/maps?q=Metro+Irarr%C3%A1zaval,+%C3%91u%C3%B1oa&z=16&hl=es&output=embed';
+
+export function mapSrc(keyedSrc, hostname) {
+  const hasKey = keyedSrc && !keyedSrc.includes('__GOOGLE_MAPS_API_KEY__');
+  return hasKey && hostname === MAP_HOST ? keyedSrc : MAP_KEYLESS;
+}
+
 export function initMap() {
   const mapFrame = document.querySelector('.mapa__frame');
-  if (mapFrame && !mapFrame.dataset.src.includes('__GOOGLE_MAPS_API_KEY__')) {
-    mapFrame.src = mapFrame.dataset.src;
-    mapFrame.closest('.mapa').classList.add('has-map');
-  }
+  if (!mapFrame) return;
+  mapFrame.src = mapSrc(mapFrame.dataset.src, location.hostname);
+  mapFrame.closest('.mapa').classList.add('has-map');
 }
 
 // Keeps each "Diseño 1 / Diseño 2" link pointing at the section currently on screen
@@ -140,27 +149,9 @@ export function initStickyNav(selector) {
   update();
 }
 
-// Count-up numbers (formatted es-CL: 1.000)
-const nf = new Intl.NumberFormat('es-CL');
-function countUp(el) {
-  const end = Number(el.dataset.count);
-  const pre = el.dataset.prefix || '';
-  const suf = el.dataset.suffix || '';
-  const dur = 1400;
-  const t0 = performance.now();
-  const step = (t) => {
-    const p = Math.min((t - t0) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = pre + nf.format(Math.round(end * eased)) + suf;
-    if (p < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-
-// When reveals fire. Photos start on their first visible pixel; text a little before
-// it is fully on screen. Exported so the timing is pinned by tests.
+// When photos reveal: on their first visible pixel. Text never animates on scroll;
+// the photo unveil is the page's one signature motion. Exported so tests pin it.
 export const REVEAL_OBSERVERS = {
-  text: { rootMargin: '0px 0px -8% 0px', threshold: 0 },
   images: { rootMargin: '0px 0px 0px 0px', threshold: 0 },
 };
 
@@ -174,45 +165,42 @@ function imagesReady(el) {
   }));
 }
 
-function reveal(el) {
-  el.classList.add('is-in');
-  el.querySelectorAll?.('[data-count]').forEach(countUp);
-  if (el.matches('[data-count]')) countUp(el);
-}
-
-// Scroll reveal: siblings in the same group get a staggered delay
-export function initReveal({ groups, images }) {
-  const texts = [];
-  groups.forEach((sel) => {
-    document.querySelectorAll(sel).forEach((el, i) => {
-      el.classList.add('reveal');
-      el.style.setProperty('--d', `${Math.min(i, 8) * 0.08}s`);
-      texts.push(el);
-    });
-  });
-  const photos = images ? [...document.querySelectorAll(images)] : [];
+// Photo reveal: each matched frame gets .reveal-img, then .is-in once on screen
+export function initReveal(selector) {
+  const photos = [...document.querySelectorAll(selector)];
   photos.forEach((el) => el.classList.add('reveal-img'));
+  const show = (el) => el.classList.add('is-in');
 
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    [...texts, ...photos].forEach(reveal);
+    photos.forEach(show);
     return;
   }
-
-  const textIO = new IntersectionObserver((entries) => {
+  const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
-      reveal(e.target);
-      textIO.unobserve(e.target);
-    });
-  }, REVEAL_OBSERVERS.text);
-  texts.forEach((el) => textIO.observe(el));
-
-  const photoIO = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      photoIO.unobserve(e.target);
-      imagesReady(e.target).then(() => reveal(e.target));
+      io.unobserve(e.target);
+      imagesReady(e.target).then(() => show(e.target));
     });
   }, REVEAL_OBSERVERS.images);
-  photos.forEach((el) => photoIO.observe(el));
+  photos.forEach((el) => io.observe(el));
+}
+
+// Mobile menu: the button toggles .is-open on its [data-menu] container.
+// Closes on a link tap, Escape, a tap outside, or when the button is hidden (wider screen).
+export function initMenu() {
+  const btn = document.querySelector('.menu-btn');
+  const box = btn?.closest('[data-menu]');
+  if (!box) return;
+  const set = (open) => {
+    btn.setAttribute('aria-expanded', String(open));
+    box.classList.toggle('is-open', open);
+  };
+  btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  document.getElementById(btn.getAttribute('aria-controls'))
+    .addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && box.classList.contains('is-open')) { set(false); btn.focus(); }
+  });
+  document.addEventListener('click', (e) => { if (!box.contains(e.target)) set(false); });
+  window.addEventListener('resize', () => { if (!btn.offsetParent) set(false); }, { passive: true });
 }

@@ -94,10 +94,64 @@ test('D2 content is visible without JS: hiding rules are scoped to .js', () => {
 });
 
 test('D2 contrast pairs pass AA', () => {
-  assert.ok(contrast('#7A6257', '#FBEFE6') >= 4.5, 'muted on bg');
+  const css = read('calido.css');
+  for (const c of ['--bg: #EEF1E9', '--muted: #5C6152']) assert.ok(css.includes(c), `missing ${c}`);
+  assert.ok(!css.toLowerCase().includes('#fbefe6'), 'old cream background is back');
+  assert.ok(contrast('#5C6152', '#EEF1E9') >= 4.5, 'muted on bg');
   assert.ok(contrast('#3A2318', '#F6B48F') >= 4.5, 'brown on peach');
   assert.ok(contrast('#3A2318', '#9DBF9A') >= 4.5, 'brown on sage');
-  assert.ok(contrast('#FBEFE6', '#3A2318') >= 4.5, 'bg on brown');
+  assert.ok(contrast('#EEF1E9', '#3A2318') >= 4.5, 'bg on brown');
+});
+
+// ---------- Audit polish ----------
+test('only the hero title carries a highlight; section titles are plain', () => {
+  const d2 = read('calido.html');
+  assert.equal((d2.match(/class="hl"/g) || []).length, 1);
+  assert.match(d2, /<h1[^>]*>[^<]*<span class="hl">/);
+});
+
+test('no middle-dot meta strings or arrows in visible copy', () => {
+  for (const f of ['index.html', 'calido.html']) {
+    const body = read(f).split('<body>')[1];
+    assert.ok(!body.includes('·'), `${f} has a middle dot`);
+    assert.ok(!/[↓↗→]/.test(body), `${f} has an arrow`);
+  }
+});
+
+test('scroll motion is photos only: no text reveal, no count-up', () => {
+  for (const f of ['main.js', 'calido.js']) assert.ok(!read(f).includes('groups'), `${f} still reveals text`);
+  for (const f of ['index.html', 'calido.html']) assert.ok(!read(f).includes('data-count'), `${f} still counts up`);
+  for (const f of ['styles.css', 'calido.css']) assert.ok(!/\.js \.reveal \{/.test(read(f)), `${f} still hides text`);
+});
+
+test('both designs show the logo mark in nav and footer, and in the favicon', () => {
+  for (const f of ['index.html', 'calido.html']) {
+    assert.equal((read(f).match(/class="mark"/g) || []).length, 2, `${f}: mark in nav and footer`);
+  }
+  assert.ok(read('favicon.svg').includes('M7 11h14'), 'favicon uses the cup mark');
+});
+
+test('mobile menu: a button that controls the nav links, hidden without JS', () => {
+  for (const [html, css] of [['index.html', 'styles.css'], ['calido.html', 'calido.css']]) {
+    const h = read(html);
+    assert.match(h, /<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"/);
+    assert.ok(h.includes('id="nav-links"'));
+    assert.ok(h.includes('data-menu'));
+    const c = read(css);
+    assert.match(c, /\.menu-btn \{[^}]*display: none/);
+    assert.match(c, /\.js \.menu-btn \{ display: grid; \}/);
+  }
+});
+
+test('touch targets reach 44px on mobile', () => {
+  const d1 = read('styles.css');
+  assert.match(d1, /\.menu-btn \{[^}]*width: 44px; height: 44px/);
+  assert.match(d1, /@media \(max-width: 859px\) \{[\s\S]*?\.switch a \{ min-height: 44px; \}/, 'D1 switch links 44px');
+  assert.match(d1, /\.nav__brand \{[^}]*min-height: 44px/);
+  const d2 = read('calido.css');
+  assert.match(d2, /\.tabs__btn \{[^}]*min-height: 44px/);
+  assert.match(d2, /\.nav__logo \{[^}]*min-height: 44px/);
+  assert.match(d2, /\.switch \{ padding: 2px; \}\s*\.switch a \{ min-height: 44px;/, 'D2 switch links 44px');
 });
 
 // ---------- Design switch ----------
@@ -126,7 +180,10 @@ test('every WhatsApp button is WhatsApp green with its icon', () => {
   for (const f of ['index.html', 'calido.html']) {
     const buttons = [...read(f).matchAll(/<a [^>]*js-wa[^>]*>([\s\S]*?)<\/a>/g)];
     assert.ok(buttons.length >= 3, `${f}: expected WhatsApp buttons`);
-    for (const [, inner] of buttons) assert.ok(inner.includes('class="wa-icon"'), `${f}: WhatsApp button without icon`);
+    for (const [, inner] of buttons) {
+      assert.ok(inner.includes('class="wa-icon"'), `${f}: WhatsApp button without icon`);
+      assert.equal(inner.replace(/<svg[\s\S]*<\/svg>/, '').trim(), 'Pedir por WhatsApp', `${f}: every WhatsApp button says the same thing`);
+    }
   }
   for (const f of ['styles.css', 'calido.css']) {
     const css = read(f);
@@ -156,7 +213,7 @@ test('CSS and JS revalidate on every visit so a deploy never mixes old styles wi
 test('D2 cards stay visible; their photos animate instead', () => {
   const js = read('calido.js');
   assert.ok(!/'\.card'/.test(js), 'cards must not be hidden by the reveal');
-  assert.match(js, /images:\s*'[^']*\.card__img/);
+  assert.match(js, /initReveal\('[^']*\.card__img/);
 });
 
 test('D1 WhatsApp button and design switch use soft 8px corners', () => {

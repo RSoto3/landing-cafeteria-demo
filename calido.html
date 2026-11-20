@@ -27,19 +27,21 @@
 <body>
 
   <!-- fixed nav: outside the hero so it stacks above every section -->
-  <nav class="nav" aria-label="Principal">
-    <a class="nav__logo" href="#inicio">andén</a>
-    <ul class="nav__links">
+  <nav class="nav" aria-label="Principal" data-menu>
+    <a class="nav__logo" href="#inicio"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M11.5 4.5c-1 1.2 1 2.2 0 3.6M16.5 4.5c-1 1.2 1 2.2 0 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 11h14v5.5a6.5 6.5 0 0 1-6.5 6.5h-1A6.5 6.5 0 0 1 7 16.5z" fill="currentColor"/><path d="M21 13.2h1.4a2.9 2.9 0 0 1 0 5.8h-1.9" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="mark__edge" x="3" y="26" width="26" height="3" rx="1.5"/></svg><span>andén</span></a>
+    <ul class="nav__links" id="nav-links">
       <li><a href="#carta">Carta</a></li>
-      <li><a href="#trabajar">Para trabajar</a></li>
+      <li><a href="#trabajar">Cowork</a></li>
       <li><a href="#pedir">Pedir</a></li>
+      <li class="nav__extra"><a href="#historia">Historia</a></li>
       <li><a href="#llegar">Cómo llegar</a></li>
     </ul>
     <div class="switch" role="group" aria-label="Elegir diseño">
       <a data-design-link="/" href="/">Diseño 1</a>
       <a data-design-link="/calido" href="/calido" aria-current="page">Diseño 2</a>
     </div>
-    <a class="pill pill--wa pill--sm nav__wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>WhatsApp</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menú"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <a class="pill pill--wa pill--sm nav__wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp</a>
   </nav>
 
   <!-- PORTADA -->
@@ -58,7 +60,7 @@
           <p class="status" data-estado hidden></p>
           <h1 class="hero__title">Café de barrio, <span class="hl">bien hecho.</span></h1>
           <p class="hero__lead">Tostamos en Santiago, horneamos todas las mañanas y tenemos mesas largas para quedarse. A media cuadra del metro Irarrázaval.</p>
-          <a class="pill pill--light" href="#carta">Ver la carta ↓</a>
+          <a class="pill pill--light" href="#carta">Ver la carta</a>
         </div>
         <p class="sticker">Wifi + enchufes en todas las mesas</p>
       </div>
@@ -71,7 +73,7 @@
     <section class="section" id="carta" aria-labelledby="carta-title">
       <div class="wrap">
         <div class="sec-head">
-          <h2 id="carta-title" class="h2">Lo que <span class="hl">más sale.</span></h2>
+          <h2 id="carta-title" class="h2">Lo que más sale.</h2>
           <p class="lead">Grano de tueste medio, tostado cada dos semanas en San Joaquín. Leche de avena o almendra sin cobro extra.</p>
         </div>
 
@@ -152,13 +154,13 @@
                alt="Barista en la barra frente a la pizarra con la carta y una ventana grande">
         </div>
         <div class="work__text">
-          <h2 id="trabajar-title" class="h2">Quédate <span class="hl">un rato largo.</span></h2>
+          <h2 id="trabajar-title" class="h2">Quédate un rato largo.</h2>
           <p class="lead">El segundo piso es la parte tranquila: mesas largas, luz de ventana hasta las seis y nadie te va a apurar. Si vienen en grupo a reunión, usen la mesa del fondo.</p>
-          <ul class="tiles">
-            <li class="tile tile--peach"><strong data-count="300" data-suffix=" Mb">300 Mb</strong><span>Wifi por fibra. La clave viene impresa en la boleta.</span></li>
-            <li class="tile tile--sage"><strong data-count="22">22</strong><span>enchufes, casi uno por asiento en el segundo piso.</span></li>
-            <li class="tile tile--white"><strong>2º piso</strong><span>sin música fuerte ni licuadora cerca.</span></li>
-            <li class="tile tile--brown"><strong data-count="1000" data-prefix="$">$1.000</strong><span>el rellenado de café de filtro si sigues trabajando.</span></li>
+          <ul class="perks">
+            <li><strong>Wifi de 300 Mb por fibra.</strong> La clave viene impresa en la boleta.</li>
+            <li><strong>22 enchufes,</strong> casi uno por asiento en el segundo piso.</li>
+            <li><strong>Un piso sin ruido:</strong> ni música fuerte ni licuadora cerca.</li>
+            <li><strong>Rellenas por $1.000</strong> el café de filtro si sigues trabajando.</li>
           </ul>
         </div>
       </div>
@@ -173,7 +175,7 @@
           <li><span class="steps__n">2</span><p>Te respondemos con el total y la hora en que queda listo. Casi siempre son 10 minutos.</p></li>
           <li><span class="steps__n">3</span><p>Lo retiras en la barra, al lado de la caja. Pagas ahí con tarjeta, efectivo o transferencia.</p></li>
         </ol>
-        <a class="pill pill--wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Escribir por WhatsApp</a>
+        <a class="pill pill--wa js-wa" href="#pedir"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp</a>
         <p class="order__note">Recibimos pedidos desde las 7:30. No hacemos delivery: somos pocos y preferimos que el café llegue caliente.</p>
       </div>
       <div class="order__photo">
@@ -198,14 +200,14 @@
           <figcaption class="note">Ignacio en la barra, un martes a las nueve.</figcaption>
         </figure>
         <div class="story__text">
-          <h2 id="historia-title" class="h2">Antes aquí había una <span class="hl">ferretería.</span></h2>
+          <h2 id="historia-title" class="h2">Antes aquí había una ferretería.</h2>
           <p>Ignacio Fuentes estuvo nueve años detrás de barras ajenas en Providencia. En 2019 arrendó el local de la esquina, el que fue la ferretería de don Julio por casi treinta años, y lo arregló con su hermano un fin de semana tras otro. Los estantes del fondo son los mismos.</p>
           <p>Le puso Andén porque la mitad de la gente que entra viene saliendo del metro, apurada. La otra mitad se queda toda la mañana. Las dos cosas nos parecen bien.</p>
           <p>Hoy somos seis. Carmen, la mamá de Ignacio, hace las tortas; el pan llega a las siete desde una panadería de la calle Dublé Almeyda.</p>
           <ul class="facts">
             <li class="pill">Desde marzo 2019</li>
             <li class="pill">6 personas</li>
-            <li class="pill pill--peach"><span data-count="340" data-prefix="Unos " data-suffix=" cafés al día">Unos 340 cafés al día</span></li>
+            <li class="pill pill--peach">Unos 340 cafés al día</li>
           </ul>
         </div>
       </div>
@@ -215,7 +217,7 @@
     <section class="section section--tight" id="llegar" aria-labelledby="llegar-title">
       <div class="wrap">
         <div class="sec-head">
-          <h2 id="llegar-title" class="h2">A media cuadra <span class="hl">del metro.</span></h2>
+          <h2 id="llegar-title" class="h2">A media cuadra del metro.</h2>
         </div>
         <div class="visit">
           <div class="mapa" id="mapa">
@@ -227,7 +229,7 @@
             <iframe class="mapa__frame" title="Mapa: Café Andén, a media cuadra del metro Irarrázaval"
                     data-src="https://www.google.com/maps/embed/v1/place?key=__GOOGLE_MAPS_API_KEY__&amp;q=Metro+Irarr%C3%A1zaval,+%C3%91u%C3%B1oa&amp;zoom=16&amp;language=es&amp;region=CL"
                     loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <a class="pill pill--dark mapa__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Metro+Irarr%C3%A1zaval+%C3%91u%C3%B1oa" target="_blank" rel="noopener">Ver ruta en Google Maps ↗</a>
+            <a class="pill pill--dark mapa__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Metro+Irarr%C3%A1zaval+%C3%91u%C3%B1oa" target="_blank" rel="noopener">Ver ruta en Google Maps</a>
           </div>
 
           <div class="visit__box">
@@ -261,19 +263,19 @@
   <footer class="footer">
     <div class="footer__inner">
       <div>
-        <p class="footer__brand">andén</p>
-        <p>Av. Irarrázaval 2940, Ñuñoa<br>Lun a vie 7:30–20:30 · Sáb 9:00–20:00</p>
+        <p class="footer__brand"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M11.5 4.5c-1 1.2 1 2.2 0 3.6M16.5 4.5c-1 1.2 1 2.2 0 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 11h14v5.5a6.5 6.5 0 0 1-6.5 6.5h-1A6.5 6.5 0 0 1 7 16.5z" fill="currentColor"/><path d="M21 13.2h1.4a2.9 2.9 0 0 1 0 5.8h-1.9" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="mark__edge" x="3" y="26" width="26" height="3" rx="1.5"/></svg><span>andén</span></p>
+        <p>Av. Irarrázaval 2940, Ñuñoa<br>De lunes a viernes, de 7:30 a 20:30<br>Sábados, de 9:00 a 20:00</p>
       </div>
       <div class="footer__demo">
-        <p>Sitio de demostración · negocio ficticio</p>
+        <p>Este es un sitio de demostración: Café Andén no existe.</p>
         <p class="footer__pitch">¿Tienes un local de barrio? Hago páginas como esta: carta, horario, mapa y pedidos por WhatsApp.</p>
-        <p><a href="https://sotodev.cl" target="_blank" rel="noopener">Made by Soto Dev · sotodev.cl</a></p>
+        <p><a href="https://sotodev.cl" target="_blank" rel="noopener">Made by Soto Dev</a></p>
       </div>
     </div>
     <p class="footer__credits">Fotos de Unsplash: Qiming Chen, Louis Hansel, Macarena Navarro, Seungmin Yoon, Supradoc y Manuel Figueroa.</p>
   </footer>
 
-  <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp para retirar</a>
+  <a class="wa-bar js-wa" id="wa-bar" href="#pedir" aria-hidden="true" tabindex="-1"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.3c.2-.4.5-.4.8-.4h.6c.2 0 .4 0 .6.4l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4-.1.6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .9-.6 2-1.6 2.1-1 .2-2.6 0-4.6-1.6-1.6-1.3-2.6-2.9-2.9-3.8-.4-1.2-.1-2.2.6-2.5z" fill="currentColor"/></svg>Pedir por WhatsApp</a>
 
   <script type="module" src="calido.js"></script>
 </body>

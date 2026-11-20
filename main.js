@@ -1,6 +1,6 @@
 // Diseño 1. Shared logic (WhatsApp, hours, map, mobile bar, reveal) lives in shared.js.
 import {
-  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav, prefersReducedMotion,
+  initWhatsApp, initStatus, initWaBar, initMap, initReveal, initDesignSwitch, initStickyNav, initMenu, prefersReducedMotion,
 } from './shared.js';
 
 initWhatsApp();
@@ -10,20 +10,10 @@ initMap();
 initDesignSwitch();
 initStickyNav('#topbar');
 
-initReveal({
-  groups: [
-    '.sec-head > *',
-    '.prod figcaption',
-    '.menu__title, .menu__list li',
-    '.bleed__content > .h2, .bleed__lead',
-    '.datos li',
-    '.pedir__text > *',
-    '.historia__text > *',
-    '.llegar__info > *',
-  ],
-  images: '.prod, .historia__foto, .pedir__foto',
-});
-document.querySelectorAll('.prod figcaption').forEach((el) => el.style.setProperty('--d', '.3s'));
+initMenu();
+
+// Photos are the one scroll motion; text is simply there
+initReveal('.prod, .historia__foto, .pedir__foto');
 
 // Parallax on full-bleed photos (only while on screen)
 if (!prefersReducedMotion && 'IntersectionObserver' in window) {
