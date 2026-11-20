@@ -40,7 +40,7 @@ test('D1 styles use the new palette', () => {
 test('D1 html: theme color, noindex, new hero buttons, no hero meta line', () => {
   const html = read('index.html');
   assert.match(html, /<meta name="theme-color" content="#1E2638">/);
-  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+  assert.match(html, /<meta name="robots" content="noindex, follow">/);
   assert.ok(!html.includes('class="hero__meta"'));
   assert.ok(html.includes('Ver la carta'));
   assert.ok(html.includes('Pedir para retirar'));
@@ -57,7 +57,7 @@ const IDS = ['inicio', 'carta', 'trabajar', 'pedir', 'historia', 'llegar'];
 
 test('D2 html: structure, hooks shared with D1, noindex', () => {
   const html = read('calido.html');
-  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+  assert.match(html, /<meta name="robots" content="noindex, follow">/);
   for (const id of IDS) assert.ok(html.includes(`id="${id}"`), `missing id ${id}`);
   assert.ok(html.includes('data-estado'));
   assert.ok(html.includes('id="horario"'));

@@ -356,6 +356,7 @@ a { color: inherit; }
 .footer__brand { display: flex; align-items: center; gap: .2em; font: 800 clamp(3rem, 8vw, 5rem)/.9 var(--display); letter-spacing: -0.05em; color: var(--bg); margin-bottom: .75rem; }
 .footer__pitch { margin: .35rem 0 .5rem; max-width: 26rem; color: var(--bg); }
 @media (min-width: 760px) { .footer__pitch { margin-left: auto; } }
+.footer__dev a { font-weight: 500; }
 .footer__demo a { display: inline-block; padding-block: .7rem; color: var(--bg); font-weight: 600; text-underline-offset: 4px; }
 .footer .mark__edge { fill: var(--sage); }
 .footer__credits { margin-top: 2rem; font-size: .8rem; color: rgba(238,241,233,.6); }

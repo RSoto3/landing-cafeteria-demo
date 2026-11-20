@@ -412,6 +412,8 @@ a { color: inherit; }
 .footer__brand { display: flex; align-items: center; gap: .3em; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--paper); margin-bottom: .5rem; }
 .footer__pitch { margin: .35rem 0 .5rem; max-width: 26rem; color: var(--paper); }
 @media (min-width: 700px) { .footer__pitch { margin-left: auto; } }
+.footer__dev { color: var(--on-dark); }
+.footer__dev a { font-weight: 500; }
 .footer__demo a { display: inline-block; padding-block: .7rem; color: var(--paper); font-weight: 600; text-underline-offset: 4px; }
 .footer__credits { margin-top: 2.5rem; font-size: .8rem; color: rgba(238,240,241,.5); }
 

@@ -1,5 +1,5 @@
 /*
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: noindex, follow
 
 /img/*
   Cache-Control: public, max-age=31536000, immutable
